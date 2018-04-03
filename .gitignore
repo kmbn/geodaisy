@@ -1,0 +1,17 @@
+.cache/
+build/
+
+__pycache__/
+
+*.egg-info/
+
+*.pyc
+*.swp
+*.egg
+
+*env/
+
+/.mypy_cache/
+*.pytest_cache/
+
+.DS_Store

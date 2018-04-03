@@ -1,0 +1,18 @@
+language: python
+python:
+    - "2.7"
+    - "3.5"
+    - "3.6"
+    - "3.7-dev"
+dist: trusty
+sudo: required
+cache: pip
+install:
+    - sudo apt-get install libgeos-3.4.2
+    - pip install -r dev-requirements.txt
+    - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]] ; then pip install -r py2-requirements.txt ; else pip install mypy ; fi
+    - pip install --editable .
+script:
+    - flake8 src tests
+    - if [[ "$TRAVIS_PYTHON_VERSION" != "2.7" ]] ; then mypy --py2 src ; fi
+    - pytest
