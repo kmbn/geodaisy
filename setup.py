@@ -15,7 +15,7 @@ URL = 'https://github.com/kmbn/geodaisy'
 EMAIL = 'kmbn@nevermindtheumlauts.com'
 AUTHOR = 'Kevin Brochet-Nguyen'
 REQUIRES_PYTHON = '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
-VERSION = '0.1'
+VERSION = '0.1.1'
 REQUIRED = ['typing']  # Required packages
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -30,7 +30,8 @@ class UploadCommand(Command):
     """Support setup.py upload."""
 
     description = 'Build and publish the package.'
-    user_options = []
+    user_options = [('test', None,
+                     'Perform a test upload to test.pypi.org if set.')]
 
     @staticmethod
     def status(s):
@@ -38,9 +39,12 @@ class UploadCommand(Command):
         print('\033[1m{0}\033[0m'.format(s))
 
     def initialize_options(self):
-        pass
+        """Set default values for options."""
+        # Each user option must be listed here with their default value.
+        self.test = False
 
     def finalize_options(self):
+        """Post-process options."""
         pass
 
     def run(self):
@@ -50,16 +54,24 @@ class UploadCommand(Command):
         except OSError:
             pass
 
-        self.status('Building Source and Wheel (universal) distribution…')
+        if self.test:
+            repository = '--repository-url https://test.pypi.org/legacy/ '
+        else:
+            repository = ''
+
+        self.status('Building Source distribution…')
         os.system('{0} setup.py sdist bdist_wheel --universal'.format(
             sys.executable))
 
-        self.status('Uploading the package to PyPi via Twine…')
-        os.system('twine upload dist/*')
+        files = os.listdir('dist/')
+        source_dist = [f for f in files if f.endswith('tar.gz')][0]
+        wheel_dist = [f for f in files if f.endswith('whl')][0]
 
-        self.status('Pushing git tags…')
-        os.system('git tag v{0}'.format(VERSION))
-        os.system('git push --tags')
+        self.status('Uploading Source distribution to PyPi via Twine…')
+        os.system('twine upload {0}dist/{1}'.format(repository, source_dist))
+
+        self.status('Uploading Wheel distribution to PyPi via Twine…')
+        os.system('twine upload {0}dist/{1}'.format(repository, wheel_dist))
 
         sys.exit()
 
@@ -87,11 +99,10 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Natural Language :: English',
-        'Topic :: Scientific/Engineering :: GIS'
+        'Topic :: Scientific/Engineering :: GIS',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',

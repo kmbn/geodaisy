@@ -13,6 +13,6 @@ install:
     - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]] ; then pip install -r py2-requirements.txt ; else pip install mypy ; fi
     - pip install --editable .
 script:
-    - flake8 src tests
+    - flake8 setup.py src tests
     - if [[ "$TRAVIS_PYTHON_VERSION" != "2.7" ]] ; then mypy --py2 src ; fi
     - pytest
