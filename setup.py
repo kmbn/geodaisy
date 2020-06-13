@@ -16,7 +16,7 @@ EMAIL = 'kmbn@nevermindtheumlauts.com'
 AUTHOR = 'Kevin Brochet-Nguyen'
 REQUIRES_PYTHON = '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
 VERSION = '0.1.1'
-REQUIRED = ['typing']  # Required packages
+REQUIRED = []  # Required packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
