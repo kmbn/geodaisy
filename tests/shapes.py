@@ -13,6 +13,7 @@ wkt_point = 'POINT (30 10)'
 # LineStrings
 geo_linestring = geojson.LineString([(8.919, 44.4074), (8.923, 44.4075)])
 wkt_linestring = 'LINESTRING (30 10, 10 30, 40 40)'
+wkt_linestring2 = 'LINESTRING (-58.6120605 -34.64203155822248,-58.6132713 -34.6409059)'
 
 
 # Polygons
