@@ -69,13 +69,13 @@ def wkt_to_geo_interface(wkt):
 
         # Clean up the strings so they'll covert correctly
         if geo_type in {'Polygon', 'MultiLineString', 'MultiPolygon'}:
-            coords = re.sub(r'(?<=\d)\), \((?=\d)', ')), ((', coords)
+            coords = re.sub(r'(?<=\d)\), ?\((?=-?\d)', ')), ((', coords)
 
         # Pairs of coordinates must be enclosed in parentheses
-        coords = re.sub(r'(?<=\d), (?=\d)', '), (', coords)
+        coords = re.sub(r'(?<=\d), ?(?=-?\d)', '), (', coords)
 
         # Coordinates within parentheses must be separated by commas
-        coords = re.sub(r'(?<=\d) (?=\d)', ', ', coords)
+        coords = re.sub(r'(?<=\d) +(?=-?\d)', ', ', coords)
 
         # Now we can turn the string into a tuple or a tuple of tuples
         coords = literal_eval(coords)

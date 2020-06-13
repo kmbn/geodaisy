@@ -13,7 +13,10 @@ wkt_point = 'POINT (30 10)'
 # LineStrings
 geo_linestring = geojson.LineString([(8.919, 44.4074), (8.923, 44.4075)])
 wkt_linestring = 'LINESTRING (30 10, 10 30, 40 40)'
-wkt_linestring2 = 'LINESTRING (-58.6120605 -34.64203155822248,-58.6132713 -34.6409059)'
+wkt_linestring_ne = 'LINESTRING (58.612 34.642,58.613 34.641)'
+wkt_linestring_sw = 'LINESTRING (-58.612 -34.642,-58.613 -34.641)'
+wkt_linestring_se = 'LINESTRING (58.612 -34.642,58.613 -34.641)'
+wkt_linestring_nw = 'LINESTRING (-58.612 34.642,-58.613 34.641)'
 
 
 # Polygons
@@ -110,4 +113,5 @@ geojson_shapes = [geojson.dumps(x) for x in geo_interface_shapes]
 
 wkt_shapes = [wkt_point, wkt_linestring, wkt_polygon, wkt_polygon_with_hole,
               wkt_multipoint, wkt_multilinestring, wkt_multipolygon,
-              wkt_multipolygon_with_hole]
+              wkt_multipolygon_with_hole, wkt_linestring_ne,
+              wkt_linestring_nw, wkt_linestring_se, wkt_linestring_sw]
