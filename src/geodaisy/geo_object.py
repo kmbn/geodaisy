@@ -15,7 +15,8 @@ from .converters import (dict_to_geo_interface,
                          geo_interface_to_geojson,
                          geo_interface_to_wkt,
                          wkt_to_geo_interface,
-                         wkt_types)
+                         wkt_types,
+                         split_wkt)
 
 
 class GeoObject(object):
@@ -92,8 +93,9 @@ class GeoObject(object):
             except ValueError:
                 raise ValueError(error_msg)
         else:
-            wkt_type = geo_thing.split(' ')[0]
+            wkt_type, _ = split_wkt(geo_thing)
             if wkt_type not in wkt_types:
+
                 raise ValueError(error_msg)
             else:
                 return wkt_to_geo_interface(geo_thing)
