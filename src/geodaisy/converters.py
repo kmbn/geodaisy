@@ -59,12 +59,20 @@ def geo_interface_to_wkt(geo_interface):
     return '{} {}'.format(geo_type, coords)
 
 
+def split_wkt(wkt):
+    # type: (str) -> tuple
+    """Splits a WKT string to a type and a set of coordinates."""
+    type_coords = re.match(r'^\s*([a-zA-Z]+)\s*(\(.+)\s*$', wkt.upper())
+    if type_coords:
+        return type_coords.group(1), type_coords.group(2)
+    return None, None
+
+
 def wkt_to_geo_interface(wkt):
     # type: (str) -> dict
     """Converts a WKT string to a geo_interface dictionary."""
     try:
-        wkt_type, coords = re.split(r'(?<=[A-Z])\s', wkt)
-
+        wkt_type, coords = split_wkt(wkt)
         geo_type = type_translations[wkt_type]
 
         # Clean up the strings so they'll covert correctly

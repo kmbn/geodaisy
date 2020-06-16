@@ -14,9 +14,9 @@ wkt_point = 'POINT (30 10)'
 geo_linestring = geojson.LineString([(8.919, 44.4074), (8.923, 44.4075)])
 wkt_linestring = 'LINESTRING (30 10, 10 30, 40 40)'
 wkt_linestring_ne = 'LINESTRING (58.612 34.642,58.613 34.641)'
-wkt_linestring_sw = 'LINESTRING (-58.612 -34.642,-58.613 -34.641)'
-wkt_linestring_se = 'LINESTRING (58.612 -34.642,58.613 -34.641)'
-wkt_linestring_nw = 'LINESTRING (-58.612 34.642,-58.613 34.641)'
+wkt_linestring_sw = 'linestring (-58.612 -34.642,-58.613 -34.641)'
+wkt_linestring_se = 'LINESTRING(58.612 -34.642,58.613 -34.641)'
+wkt_linestring_nw = 'linestring(-58.612 34.642,-58.613 34.641)'
 
 
 # Polygons
